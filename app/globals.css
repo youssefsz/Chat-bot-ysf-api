@@ -128,40 +128,127 @@
 }
 
 /* Custom scrollbar that matches the design */
-.custom-scrollbar [data-radix-scroll-area-viewport] {
+.custom-scrollbar {
+  /* Firefox */
   scrollbar-width: thin;
   scrollbar-color: rgba(120, 252, 214, 0.3) rgba(255, 255, 255, 0.05);
 }
 
-.custom-scrollbar [data-radix-scroll-area-viewport]::-webkit-scrollbar {
+/* Webkit browsers (Chrome, Safari, Edge) */
+.custom-scrollbar::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
-.custom-scrollbar [data-radix-scroll-area-viewport]::-webkit-scrollbar-track {
+.custom-scrollbar::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 4px;
   margin: 8px 0;
 }
 
-.custom-scrollbar [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(120, 252, 214, 0.3);
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.2s ease;
 }
 
-.custom-scrollbar [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb:hover {
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(120, 252, 214, 0.5);
   border-color: rgba(120, 252, 214, 0.2);
 }
 
-.custom-scrollbar [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb:active {
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
   background: rgba(0, 255, 182, 0.6);
 }
 
+.custom-scrollbar::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* Ensure scrollbar is always visible on hover */
-.custom-scrollbar:hover [data-radix-scroll-area-viewport]::-webkit-scrollbar-thumb {
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
   background: rgba(120, 252, 214, 0.4);
+}
+
+/* Custom scrollbar for code blocks */
+pre::-webkit-scrollbar {
+  height: 6px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: rgba(120, 252, 214, 0.3);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 252, 214, 0.5);
+  border-color: rgba(120, 252, 214, 0.2);
+}
+
+pre::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 255, 182, 0.6);
+}
+
+/* Custom scrollbar for tables */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: rgba(120, 252, 214, 0.3);
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 252, 214, 0.5);
+  border-color: rgba(120, 252, 214, 0.2);
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 255, 182, 0.6);
+}
+
+/* Button cursor states */
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Active send button styling */
+.send-button-active {
+  cursor: pointer !important;
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(120, 252, 214, 0.3);
+}
+
+/* Hover effects for buttons */
+button:not(:disabled):hover {
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Check availability button specific styling */
+.check-availability-btn:not(:disabled):hover {
+  background: rgba(120, 252, 214, 0.1);
+  border-color: rgba(120, 252, 214, 0.3);
 }
 
 /* Animation utilities */

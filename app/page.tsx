@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Send, Trash2, Bot } from "lucide-react"
+import { Send, Trash2, Bot, RefreshCw } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
@@ -31,6 +31,8 @@ export default function ChatPage() {
   ])
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false)
+  const [availabilityStatus, setAvailabilityStatus] = useState<string>("")
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const chatContentRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -131,6 +133,31 @@ export default function ChatPage() {
     ])
   }
 
+  const checkAvailability = async () => {
+    setIsCheckingAvailability(true)
+    setAvailabilityStatus("")
+    try {
+      const response = await fetch("https://python-test-server-uld3.onrender.com/health")
+      if (response.ok) {
+        const data = await response.json()
+        setAvailabilityStatus("API is online")
+        console.log("API is available:", data)
+        // Clear status after 1.5 seconds
+        setTimeout(() => setAvailabilityStatus(""), 1500)
+      } else {
+        setAvailabilityStatus("API is offline")
+        console.log("API is not available")
+        setTimeout(() => setAvailabilityStatus(""), 1500)
+      }
+    } catch (error) {
+      setAvailabilityStatus("Connection failed")
+      console.error("Availability check failed:", error)
+      setTimeout(() => setAvailabilityStatus(""), 1500)
+    } finally {
+      setIsCheckingAvailability(false)
+    }
+  }
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault()
@@ -164,6 +191,28 @@ export default function ChatPage() {
               <div className="flex items-center gap-3">
                 <p className="text-xs sm:text-sm text-[#e7eceb]/70">Always here to help</p>
                 <HealthCheck />
+                <div className="flex items-center gap-1">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={checkAvailability}
+                    disabled={isCheckingAvailability}
+                    className="h-6 px-2 text-xs text-[#e7eceb]/70 hover:text-[#e7eceb] hover:bg-white/5 transition-colors relative group check-availability-btn"
+                    title="Check API availability"
+                  >
+                    <RefreshCw className={`h-3 w-3 ${isCheckingAvailability ? 'animate-spin' : ''} transition-transform group-hover:rotate-180`} />
+                  </Button>
+                  {availabilityStatus && (
+                    <motion.span
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -10 }}
+                      className="text-xs text-[#78fcd6] font-medium"
+                    >
+                      {availabilityStatus}
+                    </motion.span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -224,7 +273,11 @@ export default function ChatPage() {
             <Button
               onClick={sendMessage}
               disabled={!input.trim() || isLoading}
-              className="bg-[#78fcd6] hover:bg-[#00ffb6] text-[#0f1211] rounded-xl px-3 py-2 sm:px-4 sm:py-3 h-10 sm:h-12 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-[#78fcd6]/20 flex-shrink-0"
+              className={`bg-[#78fcd6] hover:bg-[#00ffb6] text-[#0f1211] rounded-xl px-3 py-2 sm:px-4 sm:py-3 h-10 sm:h-12 transition-all duration-200 shadow-lg hover:shadow-[#78fcd6]/20 flex-shrink-0 ${
+                !input.trim() || isLoading 
+                  ? 'opacity-50 cursor-not-allowed' 
+                  : 'cursor-pointer send-button-active'
+              }`}
             >
               <Send className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
