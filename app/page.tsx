@@ -166,7 +166,7 @@ export default function ChatPage() {
   }
 
   return (
-    <div className="h-screen bg-[#0f1211] text-[#e7eceb] flex items-center justify-center p-2 sm:p-4">
+    <div className="h-screen bg-[#0f1211] text-[#e7eceb] flex items-center justify-center p-2 sm:p-4 pt-20 sm:pt-24">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}

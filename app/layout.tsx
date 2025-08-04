@@ -2,11 +2,15 @@ import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
+import Navigation from '@/components/navigation'
+import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'Chat API - AI-Powered Conversations',
+  description: 'A powerful AI chat API built for developers. Integrate intelligent conversations into your applications with ease.',
+  keywords: 'AI, Chat API, Mistral AI, Developer Tools, Chatbot, API Integration',
+  authors: [{ name: 'Youssef Dhibi', url: 'https://youssef.tn' }],
+  creator: 'Youssef Dhibi',
 }
 
 export default function RootLayout({
@@ -16,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body className={GeistSans.className}>{children}</body>
+      <body className={`${GeistSans.className} min-h-screen flex flex-col`}>
+        <Navigation />
+        <main className="flex-1">
+          {children}
+        </main>
+        <Footer />
+      </body>
     </html>
   )
 }
