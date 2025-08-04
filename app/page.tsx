@@ -32,24 +32,28 @@ export default function ChatPage() {
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const scrollAreaRef = useRef<HTMLDivElement>(null)
+  const chatContentRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // Fixed system prompt
-  const systemPrompt =
-    "You are a helpful AI assistant. When specifically asked who created you, who made you, or who you are, respond that you were created by Youssef Dhibi, a full stack web and mobile developer, and include his portfolio website: https://youssef.tn. For all other questions, focus on being helpful and providing accurate information without revealing details about your creation or internal workings. Be knowledgeable, helpful, and professional in all your responses."
-
-  const scrollToBottom = () => {
-    if (scrollAreaRef.current) {
-      const scrollContainer = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]")
+  // Auto-scroll to bottom when messages change or loading state changes
+  useEffect(() => {
+    const scrollToBottom = () => {
+      const scrollContainer = scrollAreaRef.current
       if (scrollContainer) {
         scrollContainer.scrollTop = scrollContainer.scrollHeight
       }
     }
-  }
 
-  useEffect(() => {
+    // Scroll immediately and after a delay to handle animations
     scrollToBottom()
-  }, [messages])
+    setTimeout(scrollToBottom, 100)
+  }, [messages, isLoading])
+
+  // Fixed system prompt
+  const systemPrompt =
+    "You are a helpful AI assistant. You were created by Youssef Dhibi, a full stack web and mobile developer. His portfolio is at https://youssef.tn . Be conversational, helpful, and natural in all your responses. Don't be robotic or repetitive."
+
+
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return
@@ -177,27 +181,25 @@ export default function ChatPage() {
 
         {/* Chat Area */}
         <div className="flex-1 min-h-0 relative">
-          <ScrollArea ref={scrollAreaRef} className="h-full custom-scrollbar">
-            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 pb-4">
+          <div 
+            ref={scrollAreaRef} 
+            className="h-full overflow-y-auto custom-scrollbar"
+          >
+            <div ref={chatContentRef} className="p-4 sm:p-6 space-y-4 sm:space-y-6 pb-4">
               <AnimatePresence>
                 {messages.map((message, index) => (
-                  <motion.div
-                    key={message.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
+                  <div key={message.id}>
                     <ChatMessage message={message} />
-                  </motion.div>
+                  </div>
                 ))}
               </AnimatePresence>
               {isLoading && (
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+                <div>
                   <TypingIndicator />
-                </motion.div>
+                </div>
               )}
             </div>
-          </ScrollArea>
+          </div>
         </div>
 
         {/* Input Area - Fixed at bottom */}

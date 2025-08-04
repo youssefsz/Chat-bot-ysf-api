@@ -119,11 +119,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Inter", sans-serif;
+    font-family: var(--font-sans), "Inter", sans-serif;
   }
 
   .font-mono {
-    font-family: "JetBrains Mono", monospace;
+    font-family: var(--font-mono), "JetBrains Mono", monospace;
   }
 }
 
