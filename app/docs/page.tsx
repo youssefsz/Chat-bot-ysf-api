@@ -144,10 +144,10 @@ const DocsPage = () => {
           
           <Tabs defaultValue="health" className="space-y-6">
             <TabsList className="grid w-full grid-cols-4 bg-[#27272a]/30 border border-white/10">
-              <TabsTrigger value="health" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">Health</TabsTrigger>
-              <TabsTrigger value="info" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">Info</TabsTrigger>
-              <TabsTrigger value="completions" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">Completions</TabsTrigger>
-              <TabsTrigger value="simple" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">Simple Chat</TabsTrigger>
+              <TabsTrigger value="health" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">Health</TabsTrigger>
+              <TabsTrigger value="info" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">Info</TabsTrigger>
+              <TabsTrigger value="completions" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">Completions</TabsTrigger>
+              <TabsTrigger value="simple" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">Simple Chat</TabsTrigger>
             </TabsList>
 
             <TabsContent value="health">
@@ -317,9 +317,9 @@ const DocsPage = () => {
           
           <Tabs defaultValue="javascript" className="space-y-6">
             <TabsList className="grid w-full grid-cols-3 bg-[#27272a]/30 border border-white/10">
-              <TabsTrigger value="javascript" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">JavaScript</TabsTrigger>
-              <TabsTrigger value="python" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">Python</TabsTrigger>
-              <TabsTrigger value="curl" className="data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6]">cURL</TabsTrigger>
+              <TabsTrigger value="javascript" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">JavaScript</TabsTrigger>
+              <TabsTrigger value="python" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">Python</TabsTrigger>
+              <TabsTrigger value="curl" className="text-[#e7eceb]/70 data-[state=active]:bg-[#78fcd6]/20 data-[state=active]:text-[#78fcd6] hover:text-[#e7eceb]">cURL</TabsTrigger>
             </TabsList>
 
             <TabsContent value="javascript">
@@ -512,7 +512,7 @@ def chat_completion(messages, system_prompt=None, max_tokens=1000, temperature=0
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   variant="outline" 
-                  className="border-[#78fcd6]/30 text-[#78fcd6] hover:bg-[#78fcd6]/10"
+                  className="bg-transparent border-[#78fcd6]/30 text-[#78fcd6] hover:bg-[#78fcd6]/10 hover:border-[#78fcd6]/50"
                   onClick={() => window.open('https://youssef.tn', '_blank')}
                 >
                   <ExternalLink className="w-4 h-4 mr-2" />
@@ -520,7 +520,7 @@ def chat_completion(messages, system_prompt=None, max_tokens=1000, temperature=0
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="border-[#78fcd6]/30 text-[#78fcd6] hover:bg-[#78fcd6]/10"
+                  className="bg-transparent border-[#78fcd6]/30 text-[#78fcd6] hover:bg-[#78fcd6]/10 hover:border-[#78fcd6]/50"
                   onClick={() => window.open('https://python-test-server-uld3.onrender.com/health', '_blank')}
                 >
                   <Globe className="w-4 h-4 mr-2" />
